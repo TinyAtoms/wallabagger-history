@@ -1,5 +1,6 @@
 //* globals WallabagApi */
 
+
 // declarations
 
 if (typeof (browser) === 'undefined' && typeof (chrome) === 'object') {
@@ -44,6 +45,11 @@ CacheType.prototype = {
 };
 
 const wallabagContextMenus = [
+    {
+        id: 'options',
+        title: Common.translate('Options'),
+        contexts: ['browser_action']
+    },
     {
         id: 'wallabagger-add-link',
         title: Common.translate('Wallabag_it'),
@@ -178,6 +184,9 @@ function openOptionsPage () {
 
 function onContextMenusClicked (info) {
     switch (info.menuItemId) {
+        case 'options':
+            openOptionsPage();
+            break;
         case 'wallabagger-add-link':
             if (typeof (info.linkUrl) === 'string' && info.linkUrl.length > 0) {
                 savePageToWallabag(info.linkUrl, true);
