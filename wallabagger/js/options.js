@@ -34,6 +34,8 @@ const OptionsController = function () {
     this.httpsMessage = document.getElementById('https-message');
     this.httpsButton = document.getElementById('https-button');
     this.autoAddSingleTag = document.getElementById('single-tag');
+    this.enableHistory = document.getElementById('enable-history-checkbox');
+    this.autoTagHistory = document.getElementById('auto-tag-history-checkbox');
     this.addListeners_();
 };
 
@@ -58,6 +60,8 @@ OptionsController.prototype = {
         this.httpsButton.addEventListener('click', this.httpsButtonClick.bind(this));
         this.autoAddSingleTag.addEventListener('click', this.autoAddSingleTagClick.bind(this));
         this.sitesToFetchLocallyInputEl.addEventListener('blur', this.onSitesToFetchLocallyChanged.bind(this));
+        this.enableHistory.addEventListener('click', this.enableHistoryClick.bind(this));
+        this.autoTagHistory.addEventListener('click', this.autoTagHistoryClick.bind(this));
     },
 
     httpsButtonClick: function () {
@@ -136,6 +140,16 @@ OptionsController.prototype = {
 
     allowSpaceCheckClick: function (e) {
         Object.assign(this.data, { AllowSpaceInTags: this.allowSpaceCheck.checked });
+        this.port.postMessage({ request: 'setup-save', data: this.data });
+    },
+
+    enableHistoryClick: function (e) {
+        Object.assign(this.data, { EnableHistory: this.enableHistory.checked });
+        this.port.postMessage({ request: 'setup-save', data: this.data });
+    },
+
+    autoTagHistoryClick: function (e) {
+        Object.assign(this.data, { AutoTagHistory: this.autoTagHistory.checked });
         this.port.postMessage({ request: 'setup-save', data: this.data });
     },
 
@@ -449,6 +463,10 @@ OptionsController.prototype = {
         }
 
         this.allowSpaceCheck.checked = this.data.AllowSpaceInTags;
+
+        this.enableHistory.checked = this.data.EnableHistory;
+
+        this.autoTagHistory.checked = this.data.AutoTagHistory;
 
         this.allowExistCheck.checked = this.data.AllowExistCheck;
 

@@ -31,6 +31,8 @@ WallabagApi.prototype = {
         isTokenExpired: true,
         isFetchPermissionGranted: null,
         AllowSpaceInTags: false,
+        EnableHistory: false,
+        AutoTagHistory: false,
         AllowExistCheck: false,
         AllowExistSafe: null,
         Debug: false,
