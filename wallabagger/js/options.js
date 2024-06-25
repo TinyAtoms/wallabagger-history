@@ -74,7 +74,7 @@ OptionsController.prototype = {
     },
 
     historyBlacklistChanged: function (e) {
-        Object.assign(this.data, { HistoryBlacklist: this.cleanStr(this.historyBlacklist.value) });
+        Object.assign(this.data, { HistoryBlacklist: this.cleanStr(this.historyBlacklist.value).split('\n') });
         this.port.postMessage({ request: 'setup-save', data: this.data });
     },
 
