@@ -480,7 +480,9 @@ OptionsController.prototype = {
 
         this.enableHistory.checked = this.data.EnableHistory;
 
-        this.historyTags.value = this.data.HistoryTags;
+        this.historyTags.value = this.data.HistoryTags.join(",");
+
+        this.historyBlacklist.value = this.data.HistoryBlacklist.join("\n");
 
         this.autoTagHistory.checked = this.data.AutoTagHistory;
 

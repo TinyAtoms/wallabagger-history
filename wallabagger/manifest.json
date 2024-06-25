@@ -1,72 +1,72 @@
 {
-    "name": "Wallabagger",
+    "name": "Wallabagger-history",
     "manifest_version": 2,
     "default_locale": "en",
-    "version": "1.17.0",
+    "version": "1.17.2",
     "description": "__MSG_Extension_description__",
     "icons": {
-      "48": "img/wallabag-icon-48.png",
-      "128": "img/wallabag-icon-128.png"
+        "48": "img/wallabag-icon-48.png",
+        "128": "img/wallabag-icon-128.png"
     },
     "browser_action": {
-      "default_title": "Wallabagger",
-      "default_icon": "img/wallabag-icon-48.png",
-      "theme_icons": [
-        {
-          "dark": "img/wallabagger.svg",
-          "light": "img/wallabagger-light.svg",
-          "size": 32
-        }
-      ],
-      "default_popup": "popup.html"
+        "default_title": "Wallabagger history",
+        "default_icon": "img/wallabag-icon-48.png",
+        "theme_icons": [
+            {
+                "dark": "img/wallabagger.svg",
+                "light": "img/wallabagger-light.svg",
+                "size": 32
+            }
+        ],
+        "default_popup": "popup.html"
     },
     "background": {
-      "scripts": [
-        "js/common.js",
-        "js/deps/text.min.js",
-        "js/deps/asmcrypto.all.es5.min.js",
-        "js/deps/webcrypto-liner.shim.min.js",
-        "js/fetch-api.js",
-        "js/wallabag-api.js",
-        "js/background.js",
-        "js/sendvisitedurls.js"
-      ]
+        "scripts": [
+            "js/common.js",
+            "js/deps/text.min.js",
+            "js/deps/asmcrypto.all.es5.min.js",
+            "js/deps/webcrypto-liner.shim.min.js",
+            "js/fetch-api.js",
+            "js/wallabag-api.js",
+            "js/background.js",
+            "js/sendvisitedurls.js"
+        ]
     },
     "permissions": [
-      "tabs",
-      "storage",
-      "contextMenus",
-      "activeTab",
-      "history"
+        "tabs",
+        "storage",
+        "contextMenus",
+        "activeTab",
+        "history"
     ],
     "optional_permissions": [
-      "*://*/api/*"
+        "*://*/api/*"
     ],
     "options_ui": {
-      "page": "options.html",
-      "open_in_tab": true
+        "page": "options.html",
+        "open_in_tab": true
     },
     "commands": {
-      "_execute_browser_action": {
-        "suggested_key": {
-          "default": "Alt+W",
-          "windows": "Alt+W",
-          "mac": "Alt+W"
-        }
-      },
-      "wallabag-it": {
-        "suggested_key": {
-          "default": "Alt+Shift+W",
-          "windows": "Alt+Shift+W",
-          "mac": "Alt+Shift+W"
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Alt+W",
+                "windows": "Alt+W",
+                "mac": "Alt+W"
+            }
         },
-        "description": "__MSG_Wallabag_it_description__"
-      }
+        "wallabag-it": {
+            "suggested_key": {
+                "default": "Alt+Shift+W",
+                "windows": "Alt+Shift+W",
+                "mac": "Alt+Shift+W"
+            },
+            "description": "__MSG_Wallabag_it_description__"
+        }
     },
-    "applications": {
-      "gecko": {
-        "id": "your-firefox-extension-id@example.com"
-      }
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{244a691f-38b5-4400-b4e8-547ce92a4878}",
+            "strict_min_version": "80.0"
+        }
     }
-  }
-  
+}
