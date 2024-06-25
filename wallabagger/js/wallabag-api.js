@@ -330,6 +330,30 @@ WallabagApi.prototype = {
                 ${error.message}`);
             });
     },
+    
+    /**
+     * Checks if a given URL exists in the wallabag API.
+     *
+     * @param {string} url - The URL to check.
+     * @return {Promise<number|null>} A Promise that resolves to the ID of the existing entry, or null if the entry does not exist.
+     * @throws {Error} If there is an error while checking the existence of the URL.
+     */
+    GetEntryByURL: function (url) {
+        const existsUrl = `${this.data.Url}/api/entries/exists.json`;
+
+        return this.CheckToken().then(() => {
+            const paramAsync = this.data.AllowExistSafe ? hashUrl(url) : Promise.resolve(url);
+            return paramAsync.then(param => `${existsUrl}?return_id=1&${this.data.AllowExistSafe ? 'hashed_url' : 'url'}=${encodeURIComponent(param)}`);
+        })
+            .then(url => this.fetchApi.Get(url, this.data.ApiToken))
+            .then(response => {
+                return response.exists;
+            })
+            .catch(error => {
+                throw new Error(`Failed to ask ${existsUrl} whether ${url} exists
+                ${error.message}`);
+            });
+    },
 
     GetArticle: function (articleId) {
         const entriesUrl = `${this.data.Url}/api/entries/${articleId}.json`;

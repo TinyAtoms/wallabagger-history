@@ -1,27 +1,32 @@
-// if (typeof (browser) === 'undefined' && typeof (chrome) === 'object') {
-//     browser = chrome;
-// }
+if (typeof (browser) === 'undefined' && typeof (chrome) === 'object') {
+    browser = chrome;
+}
 
-// // Event listener for when a new URL is visited
-// browser.history.onVisited.addListener(async historyItem => {
-//     console.log("onVisited: " + historyItem.url);
-//     if (options.data.EnableHistory){
-//         console.log("history enabled");
+async function SaveHistory(url, title, content){
+    if (api.data.AutoTagHistory){
+        // await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second
+        const options = {
+            url: url,
+            title: title,
+            content: content
+        }
+        await api.SavePage(options)
+        const articleID = await api.GetEntryByURL(url);
+        console.log("TagHistory: " + articleID);
+        if (articleID){
+            api.SaveTags(articleID,["history"])
+        }
+        
+    }
+}
 
-//         const url = historyItem.url;
-//         const title = historyItem.title;
-//         // consider wrapping this in a domcontentloaded event listener
-//         // to ensure the page has loaded before we try to save it
-//         const content = document.body.innerHTML;
-//         // Call the function to save the page to Wallabag and await its completion
-//         savePageToWallabag(url, false, title, content);
-//         console.log("URL saved to Wallabag: " + url);
+// Event listener for when a new URL is visited
+browser.history.onVisited.addListener(async historyItem => {
+    if (api.data.EnableHistory){
+        SaveHistory(historyItem.url, false, historyItem.title, document.body.innerHTML);
+    }
+    // TODO
+    // figure out how to save the tag field form the options page
+    // url blacklist that are not allowed to be saved in the history
 
-//         if (options.data.AutoTagHistory){
-//             console.log("autotag enabled");
-
-//         }
-
-//     }
-
-// });
+});
