@@ -256,13 +256,20 @@
                 <div class="form-group">
                     <label class="form-switch">
                         <input type="checkbox" id="auto-tag-history-checkbox"/>
-                        <i class="form-icon"></i><span data-i18n="Auto_tag_history">Auto tag history</span>
+                        <i class="form-icon"></i><span data-i18n="Auto_tag_history">Auto tag history </span>
                     </label>
                 </div>
 
                 <div class="form-group">
-                    <label for="history-tag-input">History Tag:</label>
+                    <label class="form-label" for="history-tag-input" data-i18n="History_tags">History Tag(s)</label>
                     <input type="text" id="history-tag-input" class="form-input">
+                </div>
+
+                <div id="sites-to-blacklist-history" class="form-group">
+                    <label class="form-label" for="sites-to-disable-history-input" data-i18n="Sites_blacklist">Sites which should not be sent to history (1 url per line)</label>
+                    <div class="input-group">
+                        <textarea class="form-input" id="sites-to-disable-history-input"></textarea>
+                    </div>
                 </div>
 
                 <h3 data-i18n="Others">Others</h3>

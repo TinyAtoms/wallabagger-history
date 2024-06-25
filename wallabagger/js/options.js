@@ -36,6 +36,8 @@ const OptionsController = function () {
     this.autoAddSingleTag = document.getElementById('single-tag');
     this.enableHistory = document.getElementById('enable-history-checkbox');
     this.autoTagHistory = document.getElementById('auto-tag-history-checkbox');
+    this.historyTags = document.getElementById("history-tag-input");
+    this.historyBlacklist = document.getElementById("sites-to-disable-history-input");
     this.addListeners_();
 };
 
@@ -62,6 +64,18 @@ OptionsController.prototype = {
         this.sitesToFetchLocallyInputEl.addEventListener('blur', this.onSitesToFetchLocallyChanged.bind(this));
         this.enableHistory.addEventListener('click', this.enableHistoryClick.bind(this));
         this.autoTagHistory.addEventListener('click', this.autoTagHistoryClick.bind(this));
+        this.historyTags.addEventListener('input', this.historyTagsChanged.bind(this));
+        this.historyBlacklist.addEventListener('input', this.historyBlacklistChanged.bind(this));
+    },
+
+    historyTagsChanged: function (e) {
+        Object.assign(this.data, { HistoryTags: this.cleanStr(this.historyTags.value).split('\n') });
+        this.port.postMessage({ request: 'setup-save', data: this.data });
+    },
+
+    historyBlacklistChanged: function (e) {
+        Object.assign(this.data, { HistoryBlacklist: this.cleanStr(this.historyBlacklist.value) });
+        this.port.postMessage({ request: 'setup-save', data: this.data });
     },
 
     httpsButtonClick: function () {
@@ -465,6 +479,8 @@ OptionsController.prototype = {
         this.allowSpaceCheck.checked = this.data.AllowSpaceInTags;
 
         this.enableHistory.checked = this.data.EnableHistory;
+
+        this.historyTags.value = this.data.HistoryTags;
 
         this.autoTagHistory.checked = this.data.AutoTagHistory;
 

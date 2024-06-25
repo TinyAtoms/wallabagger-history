@@ -332,7 +332,8 @@ WallabagApi.prototype = {
     },
     
     /**
-     * Checks if a given URL exists in the wallabag API.
+     * Checks if a given URL exists in the wallabag API and returns the ID
+     * modified from EntryExists
      *
      * @param {string} url - The URL to check.
      * @return {Promise<number|null>} A Promise that resolves to the ID of the existing entry, or null if the entry does not exist.

@@ -318,5 +318,25 @@
     "Archive_by_default_when_saving_page": {
         "message": "Archive by default when saving the page",
         "description": "Options"
-    }
+    },
+    "History": {
+        "message": "History",
+        "description": "History"
+    },
+    "Enable_history" : {
+        "message": "Enable history",
+        "description": "History"
+    },
+    "Auto_tag_history" : {
+        "message": "Auto tag history",
+        "description": "History"
+    },
+    "History_tags" : {
+        "message": "History Tag(s)",
+        "description": "History"
+    },
+    "Sites_blacklist" : {
+        "message": "Sites which should not be sent to history (1 url per line)",
+        "description": "History"
+    } 
 }
