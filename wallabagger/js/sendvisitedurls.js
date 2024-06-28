@@ -28,19 +28,17 @@ function isBlacklisted(url) {
 }
 
 async function SaveHistory(url, title, content) {
-    if (api.data.AutoTagHistory) {
-        const options = {
-            url: url,
-            title: title,
-            content: content
-        }
-        await api.SavePage(options)
-        const articleID = await api.GetEntryByURL(url);
-        if (articleID) {
-            api.SaveTags(articleID, api.data.HistoryTags)
-        }
-
+    const options = {
+        url: url,
+        title: title
     }
+    if (api.IsSiteToFetchLocally(url)) {
+        options.content = content;
+    }
+    if (api.data.AutoTagHistory) {
+        options.tags = api.data.HistoryTags;
+    }
+    await api.SavePage(options)
 }
 
 // Event listener for when a new URL is visited
@@ -50,6 +48,5 @@ browser.history.onVisited.addListener(async historyItem => {
         if (!isBlacklisted(hostname)) {
             SaveHistory(historyItem.url, false, historyItem.title, document.body.innerHTML);
         }
-
     }
 });

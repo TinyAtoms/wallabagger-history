@@ -250,6 +250,9 @@ WallabagApi.prototype = {
         if (options.content) {
             content.content = options.content;
         }
+        if (options.tags){
+            content.tags = options.tags;
+        }
         const entriesUrl = `${this.data.Url}/api/entries.json`;
         return this.CheckToken().then(a =>
             this.fetchApi.Post(entriesUrl, this.data.ApiToken, content)
